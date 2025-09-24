@@ -25,6 +25,17 @@ struct studentas {
     double galutinis_pazymis;
 };
 
+double mediana(vector<int> x) {
+    sort(x.begin(), x.end());
+    int n = x.size();
+    if (n % 2 == 0) {
+        return ((double(x[n / 2]) + double(x[n / 2 - 1])) / 2);
+    }
+    else {
+        return x[n];
+    }
+}
+
 
 int main()
 {   
