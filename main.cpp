@@ -6,6 +6,7 @@
 #include <iomanip>
 #include <string>
 #include <algorithm>
+#include <random>
 
 using std::cout;
 using std::cin;
@@ -65,6 +66,7 @@ double suma(vector<int> x) {
         cout << "Studentu skaicius: ";
         cin >> n;
         studentas laikinas;
+
         for (int i = 0; i < n; i++) {
             cout << "Studentas nr. " << i + 1 << "\n";
             cout << "Vardas: ";
@@ -72,22 +74,32 @@ double suma(vector<int> x) {
             cout << "Pavarde: ";
             cin >> laikinas.pavarde;
 
-            int sum = 0;
+            cout << "Atsitiktinai sugeneruoti balus? (Taip/Ne) " << endl;
+            string pasirinkimas;
+            cin >> pasirinkimas;
+            if (pasirinkimas == "Taip") {
+                int sk;
 
-            /*
-            for (int j = 0; j < laikinas.pazymiu_sk; j++) {
-                cout << "Pazymis nr. " << j + 1 << "\n";
-                cin >> pazymis;
-                laikinas.darbu_pazymiai.push_back(pazymis);
-                sum += pazymis;
-            }*/
+                std::random_device seed;
+                std::mt19937 gen{ seed() };
+                std::uniform_int_distribution<> dist(1, 10);
 
-            laikinas.darbu_pazymiai = nd_ivedimas();
+                cout << "Namų darbų pažymių skaičius: ";
+                cin >> sk;
+                for (int j = 0; j < sk; j++) {
+                    laikinas.darbu_pazymiai.push_back(dist(gen));
+                }
+                laikinas.egzamino_pazymis = dist(gen);
+            }
+            else {
+                laikinas.darbu_pazymiai = nd_ivedimas();
+                cout << "Egzamino pazymis: ";
+                cin >> laikinas.egzamino_pazymis;
+            }
 
-            cout << "Egzamino pazymis: ";
-            cin >> laikinas.egzamino_pazymis;
             laikinas.galutinis_pazymis = (laikinas.egzamino_pazymis * 0.6) + (suma(laikinas.darbu_pazymiai) / double(laikinas.darbu_pazymiai.size()) * 0.4);
             cout << "Galutinis pazymis (Vid.): " << laikinas.galutinis_pazymis << "\n";
+
             vector<int> visi_pazymiai = laikinas.darbu_pazymiai;
             visi_pazymiai.push_back(laikinas.egzamino_pazymis);
             laikinas.mediana = medianaa(visi_pazymiai);
