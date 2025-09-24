@@ -23,7 +23,19 @@ struct studentas {
     vector<int> darbu_pazymiai;
     int egzamino_pazymis;
     double galutinis_pazymis;
+    double mediana;
 };
+
+double mediana(vector<int> x) {
+    sort(x.begin(), x.end());
+    int n = x.size();
+    if (n % 2 == 0) {
+        return ((double(x[n / 2]) + double(x[n / 2 - 1])) / 2);
+    }
+    else {
+        return x[n/2];
+    }
+}
 
 
 int main()
@@ -53,12 +65,14 @@ int main()
         cin >> laikinas.egzamino_pazymis;
         laikinas.galutinis_pazymis = laikinas.egzamino_pazymis * 0.6 + double(sum) / double(laikinas.darbu_pazymiai.size()) * 0.4;
         cout << "Galutinis pazymis (Vid.): " << laikinas.galutinis_pazymis << "\n";
-        cout << "Galutinis pazymis (Med.)";
+        vector<int> visi_pazymiai = laikinas.darbu_pazymiai;
+        visi_pazymiai.push_back(laikinas.egzamino_pazymis);
+        laikinas.mediana = mediana(visi_pazymiai);
+        cout << "Galutinis pazymis (Med.): " << laikinas.mediana << endl;
         grupe.push_back(laikinas);
     }
-    cout << setw(15) << left << "Vardas" << setw(15) << left << "Pavarde" << setw(15) << right << "Galutinis pazymis" << "\n";
+    cout << setw(15) << left << "Vardas" << setw(15) << left << "Pavarde" << setw(15) << right << "Galutinis pazymis(Vid.) / Galutinis pazymis(Median.)" << "\n";
     for (int k = 0; k < grupe.size(); k++) {
-        cout << setw(15) << left << grupe[k].vardas << setw(15) << left << grupe[k].pavarde << setw(15) << right << round(grupe[k].galutinis_pazymis * 100) / 100;
-        cout << mediana(laikinas.darbu_pazymiai);
+        cout << setw(15) << left << grupe[k].vardas << setw(15) << left << grupe[k].pavarde << setw(23) << right << round(grupe[k].galutinis_pazymis * 100) / 100 <<setw(23) << right << grupe[k].mediana << endl;
     }
 }
