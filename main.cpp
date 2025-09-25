@@ -31,6 +31,7 @@ double mediana(vector<int>);
 double vidurkis(vector<int>);
 void lentele(vector<studentas>, string);
 double galutinio_sk(double, int);
+bool palyginti(const studentas, const studentas);
 
 int main() {
     vector<studentas> grupe;
@@ -122,6 +123,7 @@ int main() {
 
 
 void lentele(vector<studentas> x, string y) {
+    std::sort(x.begin(), x.end(), palyginti);
     if (y == "V") {
         cout << setw(15) << left << "Vardas" << setw(15) << left << "Pavarde" << setw(15) << right << "Galutinis pazymis(Vid.)" << endl;
         for (int m = 0; m < x.size(); m++) {
@@ -168,3 +170,6 @@ double galutinio_sk(double x, int y) {
     return (x * 0.4 + double(y) * 0.6);
 }
 
+bool palyginti(studentas a, studentas b) {
+    return a.pavarde < b.pavarde;
+}
