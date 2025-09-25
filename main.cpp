@@ -5,6 +5,8 @@
 #include <string>
 #include <algorithm>
 #include <random>
+#include <fstream>
+#include <sstream>
 
 using std::cout;
 using std::cin;
@@ -14,6 +16,7 @@ using std::setw;
 using std::left;
 using std::right;
 using std::vector;
+
 
 struct studentas {
     string vardas;
@@ -27,69 +30,94 @@ struct studentas {
 double mediana(vector<int>);
 double vidurkis(vector<int>);
 void lentele(vector<studentas>, string);
+double galutinio_sk(double, int);
 
 int main() {
     vector<studentas> grupe;
 
-    int n;
-    cout << "Studentu skaicius: ";
-    cin >> n;
-
-
-    for (int i = 0; i < n; i++) {
-        studentas laikinas;
-        cout << "Studentas nr. " << i + 1 <<endl;
-        cout << "Vardas: ";
-        cin >> laikinas.vardas;
-        cout << "Pavarde: ";
-        cin >> laikinas.pavarde;
-
-        cout << "Atsitiktinai sugeneruoti balus? (T/N) " << endl;
-        string pasirinkimas;
-        cin >> pasirinkimas;
-
-        if (pasirinkimas == "T") {
-            int sk;
-
-            std::random_device seed;
-            std::mt19937 gen{ seed() };
-            std::uniform_int_distribution<> dist(1, 10);
-
-            cout << "Namu darbu pazymiu skaicius: ";
-            cin >> sk;
-
-            for (int j = 0; j < sk; j++) {
-                laikinas.pazymiai.push_back(dist(gen));
-            }
-            laikinas.egzaminas = dist(gen);
-        }
-        else {
-            int pazymis = 1;
-            cout << "Veskite pazymius (0 jeigu norite nustoti vesti): " << endl;
-            while (pazymis) {
-                cin >> pazymis;
-                if (pazymis != 0) {
-                    laikinas.pazymiai.push_back(pazymis);
-                }
-            }
-            cout << "Egzamino pazymis: ";
-            cin >> laikinas.egzaminas;
-        }
-
-        laikinas.galutinis = double(laikinas.egzaminas)*0.6 + (vidurkis(laikinas.pazymiai))*0.4;
-        laikinas.galutinis = round(laikinas.galutinis * 100) / 100;
-        cout << "Galutinis pazymis (Vid.): " << laikinas.galutinis << endl;
-
-        laikinas.galutinis_mediana = double(laikinas.egzaminas) + double(mediana(laikinas.pazymiai))*0.4;
-        cout << "Galutinis pazymis (Med.): " << laikinas.galutinis_mediana << endl;
-
-        grupe.push_back(laikinas);
-    }
-
     string pasirinkimas;
-    cout << "Vesti lentele su vidurkiu, mediana arba abu (V/M/A): ";
+    cout << "Ar duomenis gauti is failo? (T/N)? " << endl;
     cin >> pasirinkimas;
-    lentele(grupe, pasirinkimas);
+
+    if (pasirinkimas == "T") {
+        std::ifstream fl;
+        fl.open("C:\\Users\\Monika\\Downloads\\studentai10000.txt");
+        string eil;
+        string zod;
+        getline(fl, eil);
+        while (getline(fl, eil)) {
+            studentas laikinas;
+            std::stringstream dalys(eil);
+            dalys >> laikinas.vardas >> laikinas.pavarde;
+            for (int g = 0; g < 15; g++) {
+                dalys >> zod;
+                laikinas.pazymiai.push_back(stoi(zod));
+            }
+            dalys >> laikinas.egzaminas;
+
+            laikinas.galutinis = round(galutinio_sk(vidurkis(laikinas.pazymiai), laikinas.egzaminas)*100)/100;
+            laikinas.galutinis_mediana = galutinio_sk(mediana(laikinas.pazymiai), laikinas.egzaminas);
+            grupe.push_back(laikinas);
+        }
+        lentele(grupe, "A");
+    }
+    else {
+        int n;
+        cout << "Studentu skaicius: ";
+        cin >> n;
+       
+        for (int i = 0; i < n; i++) {
+            studentas laikinas;
+            cout << "Studentas nr. " << i + 1 << endl;
+            cout << "Vardas: ";
+            cin >> laikinas.vardas;
+            cout << "Pavarde: ";
+            cin >> laikinas.pavarde;
+
+            cout << "Pazymius ivesti po viena ar generuoti? (V/G) " << endl;
+            string pasirinkimas1;
+            cin >> pasirinkimas1;
+
+            if (pasirinkimas1 == "G") {
+                int sk;
+
+                std::random_device seed;
+                std::mt19937 gen{ seed() };
+                std::uniform_int_distribution<> dist(1, 10);
+
+                cout << "Namu darbu pazymiu skaicius: ";
+                cin >> sk;
+
+                for (int j = 0; j < sk; j++) {
+                    laikinas.pazymiai.push_back(dist(gen));
+                }
+                laikinas.egzaminas = dist(gen);
+            }
+            else {
+                int pazymis = 1;
+                cout << "Veskite pazymius (0 jeigu norite nustoti vesti): " << endl;
+                while (pazymis) {
+                    cin >> pazymis;
+                    if (pazymis != 0) {
+                        laikinas.pazymiai.push_back(pazymis);
+                    }
+                }
+                cout << "Egzamino pazymis: ";
+                cin >> laikinas.egzaminas;
+            }
+
+
+            laikinas.galutinis = galutinio_sk(vidurkis(laikinas.pazymiai),laikinas.egzaminas);
+            laikinas.galutinis = round(laikinas.galutinis * 100) / 100;
+            laikinas.galutinis_mediana = galutinio_sk(mediana(laikinas.pazymiai),laikinas.egzaminas);
+            grupe.push_back(laikinas);
+        }
+
+        string pasirinkimas;
+        cout << "Vesti lentele su vidurkiu, mediana arba abu (V/M/A): ";
+        cin >> pasirinkimas;
+        lentele(grupe, pasirinkimas);
+    }
 }
 
 
@@ -130,5 +158,9 @@ double vidurkis(vector<int> x) {
         suma = suma + double(x[i]);
     }
     return suma/x.size();
+}
+
+double galutinio_sk(double x, int y) {
+    return (x * 0.4 + double(y) * 0.6);
 }
 
