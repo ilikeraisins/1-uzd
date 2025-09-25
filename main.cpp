@@ -135,7 +135,13 @@ void lentele(vector<studentas> x, string y) {
         }
     }
     else if (y == "A") {
-        cout << setw(15) << left << "Vardas" << setw(15) << left << "Pavarde" << setw(15) << right << "Galutinis pazymis(Vid.) / Galutinis pazymis(Median.)" << "\n";
+        cout << setw(15) << left << "Vardas" << setw(15) << left << "Pavarde" << setw(15) << right << "Galutinis pazymis(Vid.) / Galutinis pazymis(Median.)" << endl;
+        int t = 0;
+        while (t < 80) {
+            cout << "-";
+            t++;
+        }
+        cout << endl;
         for (int m = 0; m < x.size(); m++) {
             cout << setw(15) << left << x[m].vardas << setw(15) << left << x[m].pavarde << setw(17) << right << x[m].galutinis << setw(26) << right << x[m].galutinis_mediana << endl;
         }
