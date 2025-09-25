@@ -124,20 +124,21 @@ int main() {
 
 void lentele(vector<studentas> x, string y) {
     std::sort(x.begin(), x.end(), palyginti);
+    cout << setw(15) << left << "Vardas" << setw(15) << left << "Pavarde" << setw(15) << right;
     if (y == "V") {
-        cout << setw(15) << left << "Vardas" << setw(15) << left << "Pavarde" << setw(15) << right << "Galutinis pazymis(Vid.)" << endl;
+        cout <<  "Galutinis pazymis(Vid.)" << endl;
         for (int m = 0; m < x.size(); m++) {
             cout << setw(15) << left << x[m].vardas << setw(15) << left << x[m].pavarde << setw(17) << right << x[m].galutinis << endl;
         }
     }
     else if (y == "M") {
-        cout << setw(15) << left << "Vardas" << setw(15) << left << "Pavarde" << setw(15) << right << "Galutinis pazymis(Median.)" << endl;
+        cout << "Galutinis pazymis(Median.)" << endl;
         for (int m = 0; m < x.size(); m++) {
             cout << setw(15) << left << x[m].vardas << setw(15) << left << x[m].pavarde << setw(17) << right << x[m].galutinis_mediana << endl;
         }
     }
     else if (y == "A") {
-        cout << setw(15) << left << "Vardas" << setw(15) << left << "Pavarde" << setw(15) << right << "Galutinis pazymis(Vid.) Galutinis pazymis(Median.)" << endl;
+        cout <<  "Galutinis pazymis(Vid.) Galutinis pazymis(Median.)" << endl;
         for (int a = 0; a < 80; a++) {
             cout << "-";
         }
