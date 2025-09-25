@@ -1,6 +1,4 @@
-﻿// OP.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
+﻿
 #include <iostream>
 #include <vector>
 #include <iomanip>
@@ -20,33 +18,97 @@ using std::vector;
 struct studentas {
     string vardas;
     string pavarde;
-    vector<int> darbu_pazymiai;
-    int egzamino_pazymis;
-    double galutinis_pazymis;
-    double mediana;
+    vector<int> pazymiai;
+    int egzaminas;
+    double galutinis;
+    double galutinis_mediana;
 };
 
-double medianaa(vector<int> x) {
+double mediana(vector<int>);
+vector<int> nd_ivedimas();
+double sume(vector<int>);
+
+
+int main() {
+    vector<studentas> grupe;
+
+    int n;
+    cout << "Studentu skaicius: ";
+    cin >> n;
+
+    studentas laikinas;
+
+    for (int i = 0; i < n; i++) {
+        cout << "Studentas nr. " << i + 1 <<endl;
+        cout << "Vardas: ";
+        cin >> laikinas.vardas;
+        cout << "Pavarde: ";
+        cin >> laikinas.pavarde;
+
+        cout << "Atsitiktinai sugeneruoti balus? (T/N) " << endl;
+        string pasirinkimas;
+        cin >> pasirinkimas;
+
+        if (pasirinkimas == "T") {
+            int sk;
+
+            std::random_device seed;
+            std::mt19937 gen{ seed() };
+            std::uniform_int_distribution<> dist(1, 10);
+
+            cout << "Namų darbų pažymių skaičius: ";
+            cin >> sk;
+
+            for (int j = 0; j < sk; j++) {
+                laikinas.pazymiai.push_back(dist(gen));
+            }
+            laikinas.egzaminas = dist(gen);
+        }
+        else {
+            laikinas.pazymiai = nd_ivedimas();
+            cout << "Egzamino pazymis: ";
+            cin >> laikinas.egzaminas;
+        }
+
+        laikinas.galutinis = (laikinas.egzaminas * 0.6) + (suma(laikinas.pazymiai) / double(laikinas.pazymiai.size()) * 0.4);
+        cout << "Galutinis pazymis (Vid.): " << laikinas.galutinis << endl;
+
+        vector<int> visi_pazymiai = laikinas.pazymiai;
+        visi_pazymiai.push_back(laikinas.egzaminas);
+        laikinas.galutinis_mediana = mediana(visi_pazymiai);
+        cout << "Galutinis pazymis (Med.): " << laikinas.galutinis_mediana << endl;
+        grupe.push_back(laikinas);
+    }
+
+
+    cout << setw(15) << left << "Vardas" << setw(15) << left << "Pavarde" << setw(15) << right << "Galutinis pazymis(Vid.) / Galutinis pazymis(Median.)" << "\n";
+    for (int k = 0; k < grupe.size(); k++) {
+       cout << setw(15) << left << grupe[k].vardas << setw(15) << left << grupe[k].pavarde << setw(23) << right << round(grupe[k].galutinis * 100) / 100 << setw(23) << right << grupe[k].galutinis_mediana << endl;
+    }
+}
+
+
+double mediana(vector<int> x) {
     sort(x.begin(), x.end());
     int n = x.size();
     if (n % 2 == 0) {
         return ((double(x[n / 2]) + double(x[n / 2 - 1])) / 2);
-    } else {
+    } 
+    else {
         return x[n / 2];
     }
 }
 
 vector<int> nd_ivedimas() {
-    bool x = true;
-    int paz;
+    int pazymis;
     vector<int> pazymiai;
-    cout << "Veskite pažymius: "<< endl;
-    while (x) {
-        cin >> paz;
-        if (paz == 0) {
+    cout << "Veskite pažymius: " << endl;
+    while (true) {
+        cin >> pazymis;
+        if (pazymis == 0) {
             break;
         }
-        pazymiai.push_back(paz);
+        pazymiai.push_back(pazymis);
     }
     return pazymiai;
 }
@@ -59,57 +121,3 @@ double suma(vector<int> x) {
     return suma;
 }
 
-
-    int main() {
-        vector<studentas> grupe;
-        int n;
-        cout << "Studentu skaicius: ";
-        cin >> n;
-        studentas laikinas;
-
-        for (int i = 0; i < n; i++) {
-            cout << "Studentas nr. " << i + 1 << "\n";
-            cout << "Vardas: ";
-            cin >> laikinas.vardas;
-            cout << "Pavarde: ";
-            cin >> laikinas.pavarde;
-
-            cout << "Atsitiktinai sugeneruoti balus? (Taip/Ne) " << endl;
-            string pasirinkimas;
-            cin >> pasirinkimas;
-            if (pasirinkimas == "Taip") {
-                int sk;
-
-                std::random_device seed;
-                std::mt19937 gen{ seed() };
-                std::uniform_int_distribution<> dist(1, 10);
-
-                cout << "Namų darbų pažymių skaičius: ";
-                cin >> sk;
-                for (int j = 0; j < sk; j++) {
-                    laikinas.darbu_pazymiai.push_back(dist(gen));
-                }
-                laikinas.egzamino_pazymis = dist(gen);
-            }
-            else {
-                laikinas.darbu_pazymiai = nd_ivedimas();
-                cout << "Egzamino pazymis: ";
-                cin >> laikinas.egzamino_pazymis;
-            }
-
-            laikinas.galutinis_pazymis = (laikinas.egzamino_pazymis * 0.6) + (suma(laikinas.darbu_pazymiai) / double(laikinas.darbu_pazymiai.size()) * 0.4);
-            cout << "Galutinis pazymis (Vid.): " << laikinas.galutinis_pazymis << "\n";
-
-            vector<int> visi_pazymiai = laikinas.darbu_pazymiai;
-            visi_pazymiai.push_back(laikinas.egzamino_pazymis);
-            laikinas.mediana = medianaa(visi_pazymiai);
-            cout << "Galutinis pazymis (Med.): " << laikinas.mediana << endl;
-            grupe.push_back(laikinas);
-        }
-
-
-        cout << setw(15) << left << "Vardas" << setw(15) << left << "Pavarde" << setw(15) << right << "Galutinis pazymis(Vid.) / Galutinis pazymis(Median.)" << "\n";
-        for (int k = 0; k < grupe.size(); k++) {
-            cout << setw(15) << left << grupe[k].vardas << setw(15) << left << grupe[k].pavarde << setw(23) << right << round(grupe[k].galutinis_pazymis * 100) / 100 << setw(23) << right << grupe[k].mediana << endl;
-        }
-    }
