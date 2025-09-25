@@ -37,7 +37,7 @@ int main() {
     vector<studentas> grupe;
 
     string pasirinkimas;
-    cout << "Ar duomenis gauti is failo? (T/N)? " << endl;
+    cout << "Ar duomenis gauti is failo? (T/N) " << endl;
     cin >> pasirinkimas;
 
     if (pasirinkimas == "T") {
@@ -46,14 +46,18 @@ int main() {
         string eil;
         string zod;
         getline(fl, eil);
+
         while (getline(fl, eil)) {
             studentas laikinas;
+
             std::stringstream dalys(eil);
             dalys >> laikinas.vardas >> laikinas.pavarde;
+
             while(dalys >> zod) {
                 dalys >> zod;
                 laikinas.pazymiai.push_back(stoi(zod));
             }
+
             laikinas.egzaminas = laikinas.pazymiai.back();
             laikinas.pazymiai.pop_back();
 
@@ -76,7 +80,7 @@ int main() {
             cout << "Pavarde: ";
             cin >> laikinas.pavarde;
 
-            cout << "Pazymius ivesti po viena ar generuoti? (V/G) " << endl;
+            cout << "Pazymius ivedami ar generuojami? (V/G) " << endl;
             string pasirinkimas1;
             cin >> pasirinkimas1;
 
@@ -87,7 +91,7 @@ int main() {
                 std::mt19937 gen{ seed() };
                 std::uniform_int_distribution<> dist(1, 10);
 
-                cout << "Namu darbu pazymiu skaicius: ";
+                cout << "Pazymiu skaicius: ";
                 cin >> sk;
 
                 for (int j = 0; j < sk; j++) {
@@ -116,7 +120,7 @@ int main() {
         }
 
         string pasirinkimas;
-        cout << "Vesti lentele su vidurkiu, mediana arba abu (V/M/A): ";
+        cout << "Vesti lentele su vidurkiu, mediana arba abeim? (V/M/A): ";
         cin >> pasirinkimas;
         lentele(grupe, pasirinkimas);
     }
