@@ -65,7 +65,7 @@ int main() {
         }
         else {
             int pazymis = 1;
-            cout << "Veskite pažymius (0 jeigu norite nustoti vesti): " << endl;
+            cout << "Veskite pazymius (0 jeigu norite nustoti vesti): " << endl;
             while (pazymis) {
                 cin >> pazymis;
                 if (pazymis != 0) {
