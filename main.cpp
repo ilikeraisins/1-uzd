@@ -42,7 +42,7 @@ int main() {
 
     if (pasirinkimas == "T") {
         std::ifstream fl;
-        fl.open("C:\\Users\\Monika\\Downloads\\studentai10000.txt");
+        fl.open("kursiokai.txt");
         string eil;
         string zod;
         getline(fl, eil);
@@ -50,11 +50,12 @@ int main() {
             studentas laikinas;
             std::stringstream dalys(eil);
             dalys >> laikinas.vardas >> laikinas.pavarde;
-            for (int g = 0; g < 15; g++) {
+            while(dalys >> zod) {
                 dalys >> zod;
                 laikinas.pazymiai.push_back(stoi(zod));
             }
-            dalys >> laikinas.egzaminas;
+            laikinas.egzaminas = laikinas.pazymiai.back();
+            laikinas.pazymiai.pop_back();
 
             laikinas.galutinis = round(galutinio_sk(vidurkis(laikinas.pazymiai), laikinas.egzaminas)*100)/100;
             laikinas.galutinis_mediana = galutinio_sk(mediana(laikinas.pazymiai), laikinas.egzaminas);
