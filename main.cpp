@@ -41,30 +41,38 @@ int main() {
     cin >> pasirinkimas;
 
     if (pasirinkimas == "T") {
-        std::ifstream fl;
-        fl.open("kursiokai.txt");
+        std::stringstream buffer;
         string eil;
         string zod;
-        getline(fl, eil);
 
-        while (getline(fl, eil)) {
-            studentas laikinas;
+        std::ifstream fl("C:\\Users\\Monika\\Downloads\\studentai1000000.txt");
+        buffer << fl.rdbuf();
+        fl.close();
 
-            std::stringstream dalys(eil);
-            dalys >> laikinas.vardas >> laikinas.pavarde;
+        std::getline(buffer, eil);
+       
+        while (buffer) {
+            if (!buffer.eof()) {
+                std::getline(buffer, eil);
+       
+                studentas laikinas;
+                std::stringstream dalys(eil);
+                
+                dalys >> laikinas.vardas >> laikinas.pavarde;
 
-            while(dalys >> zod) {
-                dalys >> zod;
-                laikinas.pazymiai.push_back(stoi(zod));
+                while (dalys >> zod) {
+                    dalys >> zod;
+                    laikinas.pazymiai.push_back(std::stoi(zod));
+                }
+                laikinas.egzaminas = laikinas.pazymiai.back();
+                laikinas.pazymiai.pop_back();
+
+                laikinas.galutinis = round(galutinio_sk(vidurkis(laikinas.pazymiai), laikinas.egzaminas) * 100) / 100;
+                laikinas.galutinis_mediana = galutinio_sk(mediana(laikinas.pazymiai), laikinas.egzaminas);
+                grupe.push_back(laikinas);
             }
-
-            laikinas.egzaminas = laikinas.pazymiai.back();
-            laikinas.pazymiai.pop_back();
-
-            laikinas.galutinis = round(galutinio_sk(vidurkis(laikinas.pazymiai), laikinas.egzaminas)*100)/100;
-            laikinas.galutinis_mediana = galutinio_sk(mediana(laikinas.pazymiai), laikinas.egzaminas);
-            grupe.push_back(laikinas);
-        }
+            else break;
+        };
         lentele(grupe, "A");
     }
     else {
