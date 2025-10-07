@@ -35,7 +35,15 @@ double galutinio_sk(double, int);
 void generuoti_failus(int, int, string);
 void isvedimas_i_faila(vector<studentas>, string);
 
-bool palyginti(studentas a, studentas b);
+bool palyginti(studentas, studentas );
+bool palyginti_egzaminas(studentas, studentas);
+bool palyginti_mediana(studentas, studentas);
+bool palyginti_pavarde(studentas, studentas);
+void rusiuojam(vector<studentas>, int);
+
+std::stringstream failo_skaitimas(string);
+studentas studentas_uzpildimas(string);
+
 
 int main() {
     string pasirinkimas;
@@ -49,48 +57,40 @@ int main() {
         if (pasirinkimas == "T") {
             vector<studentas> grupeGerai;
             vector<studentas> grupeBlogai;
-
-            std::stringstream buffer;
             string eil;
-            string zod;
 
-            std::ifstream fl("C:\\Users\\Monika\\source\\repos\\main\\main\\100000studentai.txt");
-            buffer << fl.rdbuf();
-            fl.close();
-            
-            studentas laikinas;
+            std::stringstream buffer = failo_skaitimas("1000studentai.txt");
+
             std::getline(buffer, eil);
 
             while (buffer) {
                 if (!buffer.eof()) {
                     std::getline(buffer, eil);
-
-                    std::stringstream dalys(eil);
-
-                    dalys >> laikinas.vardas >> laikinas.pavarde;
-
-                    while (dalys >> zod) {
-                        laikinas.pazymiai.push_back(std::stoi(zod));
-                    }
-                    laikinas.egzaminas = laikinas.pazymiai.back();
-                    laikinas.pazymiai.pop_back();
-
-                    laikinas.galutinis = round(galutinio_sk(vidurkis(laikinas.pazymiai), laikinas.egzaminas) * 100) / 100;
-                    laikinas.galutinis_mediana = galutinio_sk(mediana(laikinas.pazymiai), laikinas.egzaminas);
-
-                    if (laikinas.galutinis < 5.0) {
+                    studentas laikinas = studentas_uzpildimas(eil);
+                    if (laikinas.galutinis < 5) {
                         grupeBlogai.push_back(laikinas);
                     }
                     else {
                         grupeGerai.push_back(laikinas);
                     }
-                    laikinas.pazymiai.clear();
                 }
                 else break;
             };
             
-            std::sort(grupeGerai.begin(), grupeGerai.end(), palyginti);
-            std::sort(grupeBlogai.begin(), grupeBlogai.end(), palyginti);
+            cout << "Pagal, be vardo ir galutinio pazimio, dar lyginti studentus? (E-Egzaminas,P-Pavarde,M-Mediana)" << endl;
+            cin >> pasirinkimas;
+            int atv;
+            if (pasirinkimas == "E") {
+                atv = 1;
+            }
+            else if (pasirinkimas == "P") {
+                atv = 2;
+            }
+            else if (pasirinkimas == "M") {
+                atv = 3;
+            }
+            rusiuojam(grupeGerai, atv);
+            rusiuojam(grupeBlogai, atv);
 
             isvedimas_i_faila(grupeGerai, "Geraibesimokantis.txt");
             isvedimas_i_faila(grupeBlogai, "Blogaibesimokantis.txt");
@@ -162,6 +162,46 @@ int main() {
         //generuoti_failus(1000000, 5, "1000000studentai.txt");
         //generuoti_failus(10000000, 5, "10000000studentai.txt");
     }
+}
+
+void rusiuojam(vector<studentas> x, int y) {
+    switch (y) {
+    case 1:
+        std::sort(x.begin(), x.end(), palyginti_egzaminas);
+    case 2:
+        std::sort(x.begin(), x.end(), palyginti_pavarde);
+    case 3:
+        std::sort(x.begin(), x.end(), palyginti_mediana);
+    }
+}
+
+studentas studentas_uzpildimas(string eil) {
+    studentas laikinas;
+    string zod;
+    std::stringstream dalys(eil);
+
+    dalys >> laikinas.vardas >> laikinas.pavarde;
+
+    while (dalys >> zod) {
+        laikinas.pazymiai.push_back(std::stoi(zod));
+    }
+    laikinas.egzaminas = laikinas.pazymiai.back();
+    laikinas.pazymiai.pop_back();
+
+    laikinas.galutinis = round(galutinio_sk(vidurkis(laikinas.pazymiai), laikinas.egzaminas) * 100) / 100;
+    laikinas.galutinis_mediana = galutinio_sk(mediana(laikinas.pazymiai), laikinas.egzaminas);
+    return laikinas;
+}
+
+std::stringstream failo_skaitimas(string failo_vardas) {
+    std::stringstream buffer;
+    string eil;
+    string zod;
+
+    std::ifstream fl(failo_vardas);
+    buffer << fl.rdbuf();
+    fl.close();
+    return buffer;
 }
 
 void isvedimas_i_faila(vector<studentas> x, string failo_vardas) {
@@ -250,4 +290,34 @@ bool palyginti(studentas a, studentas b) {
         return a.vardas > b.vardas;
     }
     return a.galutinis > b.galutinis;
+}
+
+bool palyginti_egzaminas(studentas a, studentas b) {
+    if (a.vardas != b.vardas) {
+        return a.vardas > b.vardas;
+    }
+    if (a.galutinis != b.galutinis) {
+        return a.galutinis > b.galutinis;
+    }
+    return a.egzaminas > b.egzaminas;
+}
+
+bool palyginti_pavarde(studentas a, studentas b) {
+    if (a.vardas != b.vardas) {
+        return a.vardas > b.vardas;
+    }
+    if (a.galutinis != b.galutinis) {
+        return a.galutinis > b.galutinis;
+    }
+    return a.pavarde > b.pavarde;
+}
+
+bool palyginti_mediana(studentas a, studentas b) {
+    if (a.vardas != b.vardas) {
+        return a.vardas > b.vardas;
+    }
+    if (a.galutinis != b.galutinis) {
+        return a.galutinis > b.galutinis;
+    }
+    return a.galutinis_mediana > b.galutinis_mediana;
 }
