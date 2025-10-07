@@ -32,8 +32,10 @@ double mediana(vector<int>);
 double vidurkis(vector<int>);
 void lentele(vector<studentas>, string);
 double galutinio_sk(double, int);
-bool palyginti(const studentas, const studentas);
 void generuoti_failus(int, int, string);
+void isvedimas_i_faila(vector<studentas>, string);
+
+bool palyginti(studentas a, studentas b);
 
 int main() {
     string pasirinkimas;
@@ -41,33 +43,33 @@ int main() {
     cin >> pasirinkimas;
 
     if (pasirinkimas == "S") {
-        vector<studentas> grupe;
-
         cout << "Ar duomenis gauti is failo? (T/N) " << endl;
         cin >> pasirinkimas;
 
         if (pasirinkimas == "T") {
+            vector<studentas> grupeGerai;
+            vector<studentas> grupeBlogai;
+
             std::stringstream buffer;
             string eil;
             string zod;
 
-            std::ifstream fl("C:\\Users\\Monika\\Downloads\\studentai1000000.txt");
+            std::ifstream fl("C:\\Users\\Monika\\source\\repos\\main\\main\\100000studentai.txt");
             buffer << fl.rdbuf();
             fl.close();
-
+            
+            studentas laikinas;
             std::getline(buffer, eil);
 
             while (buffer) {
                 if (!buffer.eof()) {
                     std::getline(buffer, eil);
 
-                    studentas laikinas;
                     std::stringstream dalys(eil);
 
                     dalys >> laikinas.vardas >> laikinas.pavarde;
 
                     while (dalys >> zod) {
-                        dalys >> zod;
                         laikinas.pazymiai.push_back(std::stoi(zod));
                     }
                     laikinas.egzaminas = laikinas.pazymiai.back();
@@ -75,13 +77,27 @@ int main() {
 
                     laikinas.galutinis = round(galutinio_sk(vidurkis(laikinas.pazymiai), laikinas.egzaminas) * 100) / 100;
                     laikinas.galutinis_mediana = galutinio_sk(mediana(laikinas.pazymiai), laikinas.egzaminas);
-                    grupe.push_back(laikinas);
+
+                    if (laikinas.galutinis < 5.0) {
+                        grupeBlogai.push_back(laikinas);
+                    }
+                    else {
+                        grupeGerai.push_back(laikinas);
+                    }
+                    laikinas.pazymiai.clear();
                 }
                 else break;
             };
-            lentele(grupe, "A");
+            
+            std::sort(grupeGerai.begin(), grupeGerai.end(), palyginti);
+            std::sort(grupeBlogai.begin(), grupeBlogai.end(), palyginti);
+
+            isvedimas_i_faila(grupeGerai, "Geraibesimokantis.txt");
+            isvedimas_i_faila(grupeBlogai, "Blogaibesimokantis.txt");
         }
         else {
+            vector<studentas> grupe;
+
             int n;
             cout << "Studentu skaicius: ";
             cin >> n;
@@ -143,9 +159,20 @@ int main() {
         generuoti_failus(1000,5,"1000studentai.txt");
         generuoti_failus(10000, 5, "10000studentai.txt");
         generuoti_failus(100000, 5, "100000studentai.txt");
-        generuoti_failus(1000000, 5, "1000000studentai.txt");
-        generuoti_failus(10000000, 5, "10000000studentai.txt");
+        //generuoti_failus(1000000, 5, "1000000studentai.txt");
+        //generuoti_failus(10000000, 5, "10000000studentai.txt");
     }
+}
+
+void isvedimas_i_faila(vector<studentas> x, string failo_vardas) {
+    string visas;
+    for (int i = 0; i < x.size(); i++) {
+        studentas laik = x[i];
+        visas += laik.vardas + " " + laik.pavarde + " " + std::to_string(laik.galutinis) + " " + std::to_string(laik.galutinis_mediana) + "\n";
+    }
+    std::ofstream out_f(failo_vardas);
+    out_f << visas;
+    out_f.close();
 }
 
 void lentele(vector<studentas> x, string y) {
@@ -184,11 +211,11 @@ void generuoti_failus(int studentu_sk, int darbu_sk, string failo_vardas) {
 
     for (int i = 1; i <= studentu_sk; i++) {
         string str;
+        str += "\n";
         str += "Vardas" + std::to_string(i) + " " + "Pavarde" + std::to_string(i);
         for (int j = 0; j <= darbu_sk; j++) {
             str += " " + std::to_string(dist(mt));
         }
-        str += "\n";
         visas += str;
     }
     std::ofstream out_f(failo_vardas);
@@ -219,5 +246,8 @@ double galutinio_sk(double x, int y) {
 }
 
 bool palyginti(studentas a, studentas b) {
-    return a.pavarde < b.pavarde;
+    if (a.vardas != b.vardas) {
+        return a.vardas > b.vardas;
+    }
+    return a.galutinis > b.galutinis;
 }
