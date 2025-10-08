@@ -40,11 +40,15 @@ std::stringstream failo_skaitimas(string failo_vardas) {
     return buffer;
 }
 
-void isvedimas_i_faila(vector<studentas> x, string failo_vardas) {
+void rasymas_i_faila(vector<studentas> x, string failo_vardas) {
     string visas;
+    string galut_v;
+    string galut_m;
     for (int i = 0; i < x.size(); i++) {
         studentas laik = x[i];
-        visas += laik.vardas + " " + laik.pavarde + " " + std::to_string(laik.galutinis) + " " + std::to_string(laik.galutinis_mediana) + "\n";
+        galut_v = std::to_string(laik.galutinis).substr(0,4);
+        galut_m = std::to_string(laik.galutinis_mediana).substr(0,4);
+        visas += laik.vardas + " " + laik.pavarde + " " + galut_v + " " + galut_m + "\n";
     }
     std::ofstream out_f(failo_vardas);
     out_f << visas;
@@ -158,3 +162,10 @@ bool palyginti_mediana(studentas a, studentas b) {
     return a.galutinis_mediana > b.galutinis_mediana;
 }
 
+bool geri_funk(studentas x) {
+    return x.galutinis >= 5.0;
+}
+
+bool blogi_funk(studentas x) {
+    return x.galutinis < 5.0;
+}

@@ -32,7 +32,7 @@ double vidurkis(vector<int>);
 void lentele(vector<studentas>, string);
 double galutinio_sk(double, int);
 void generuoti_failus(int, int,string);
-void isvedimas_i_faila(vector<studentas>, string);
+void rasymas_i_faila(vector<studentas>, string);
 
 bool palyginti(studentas, studentas);
 bool palyginti_egzaminas(studentas, studentas);
@@ -43,3 +43,5 @@ void rusiuojam(vector<studentas>, int);
 std::stringstream failo_skaitimas(string);
 studentas studentas_uzpildimas(string);
 
+bool geri_funk(studentas);
+bool blogi_funk(studentas);

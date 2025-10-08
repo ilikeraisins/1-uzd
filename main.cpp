@@ -7,6 +7,7 @@ int main() {
     cin >> pasirinkimas;
 
     if (pasirinkimas == "S") {
+        vector<studentas> grupe;
         cout << "Ar duomenis gauti is failo? (T/N) " << endl;
         cin >> pasirinkimas;
 
@@ -15,7 +16,7 @@ int main() {
             vector<studentas> grupeBlogai;
             string eil;
 
-            std::stringstream buffer = failo_skaitimas("1000studentai.txt");
+            std::stringstream buffer = failo_skaitimas("C:\\Users\\Monika\\source\\repos\\main\\main\\10000studentai.txt");
 
             std::getline(buffer, eil);
 
@@ -23,15 +24,17 @@ int main() {
                 if (!buffer.eof()) {
                     std::getline(buffer, eil);
                     studentas laikinas = studentas_uzpildimas(eil);
-                    if (laikinas.galutinis < 5) {
-                        grupeBlogai.push_back(laikinas);
-                    }
-                    else {
-                        grupeGerai.push_back(laikinas);
-                    }
+                    grupe.push_back(laikinas);
                 }
                 else break;
             };
+
+            //Išskirstimas;
+            vector<studentas> geri(grupe.size());
+            vector<studentas> blogi(grupe.size());
+
+            std::copy_if(grupe.begin(), grupe.end(), geri.begin(), geri_funk);
+            std::copy_if(grupe.begin(), grupe.end(), blogi.begin(), blogi_funk);
 
             cout << "Pagal, be vardo ir galutinio pazimio, dar lyginti studentus? (E-Egzaminas,P-Pavarde,M-Mediana)" << endl;
             cin >> pasirinkimas;
@@ -45,14 +48,14 @@ int main() {
             else if (pasirinkimas == "M") {
                 atv = 3;
             }
-            rusiuojam(grupeGerai, atv);
-            rusiuojam(grupeBlogai, atv);
 
-            isvedimas_i_faila(grupeGerai, "Geraibesimokantis.txt");
-            isvedimas_i_faila(grupeBlogai, "Blogaibesimokantis.txt");
+            rusiuojam(geri, atv);
+            rusiuojam(blogi, atv);
+
+            rasymas_i_faila(geri, "C:\\Users\\Monika\\source\\repos\\main\\main\\GeraiBesimokantys.txt");
+            rasymas_i_faila(blogi, "C:\\Users\\Monika\\source\\repos\\main\\main\\BlogaiBesimokantys.txt");
         }
         else {
-            vector<studentas> grupe;
 
             int n;
             cout << "Studentu skaicius: ";
@@ -112,10 +115,10 @@ int main() {
         }
     }
     else {
-        generuoti_failus(1000, 5, "C:\\Users\\Monika\\source\\repos\\main\\main\\1000studentai.txt");
+        ///generuoti_failus(1000, 5, "C:\\Users\\Monika\\source\\repos\\main\\main\\1000studentai.txt");
         generuoti_failus(10000, 5, "C:\\Users\\Monika\\source\\repos\\main\\main\\10000studentai.txt");
-        generuoti_failus(100000, 5, "C:\\Users\\Monika\\source\\repos\\main\\main\\100000studentai.txt");
-        generuoti_failus(1000000, 5, "C:\\Users\\Monika\\source\\repos\\main\\main\\1000000studentai.txt");
-        generuoti_failus(10000000, 5, "C:\\Users\\Monika\\source\\repos\\main\\main\\10000000studentai.txt");
+        //generuoti_failus(100000, 5, "C:\\Users\\Monika\\source\\repos\\main\\main\\100000studentai.txt");
+        //generuoti_failus(1000000, 5, "C:\\Users\\Monika\\source\\repos\\main\\main\\1000000studentai.txt");
+        //generuoti_failus(10000000, 5, "C:\\Users\\Monika\\source\\repos\\main\\main\\10000000studentai.txt");
     }
 }
