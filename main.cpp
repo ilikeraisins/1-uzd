@@ -1,7 +1,6 @@
 ﻿#include "main.h"
 #include "mylib.cpp"
 
-
 int main() {
     string pasirinkimas;
     cout << "Duomenis skaityti ar generuoti? (S/G) " << endl;
@@ -17,14 +16,17 @@ int main() {
             string eil;
 
             timer t;
-            std::stringstream buffer = failo_skaitimas("C:\\Users\\Monika\\source\\repos\\main\\main\\1000000studentai.txt");
+            std::stringstream buffer = failo_skaitimas("C:\\Users\\Monika\\source\\repos\\main\\main\\10000000studentai.txt");
             cout << "Failo nuskaitymas: " << t.elapsed() << endl;
           
-
             std::getline(buffer, eil);
 
-            vector<studentas> geri;
+            vector<studentas> geri ;
             vector<studentas> blogi;
+
+            cout << endl << "Be to, kad studentai rusiuojami pagal varda ir galutini pazymi, pagal ka dar rusiuoti? " << endl;
+            cout << "(E - egzamino pazymi, P - pavarde, M - galutini pazymi pagal mediana)" << endl;
+            cin >> pasirinkimas;
 
             t.reset();
             while (buffer) {
@@ -40,8 +42,19 @@ int main() {
                 }
                 else break;
             };
-            std::sort(blogi.begin(), blogi.end(), palyginti_egzaminas);
-            std::sort(geri.begin(), geri.end(), palyginti_egzaminas);
+
+            if (pasirinkimas == "E") {
+                std::sort(blogi.begin(), blogi.end(), palyginti_egzaminas);
+                std::sort(geri.begin(), geri.end(), palyginti_egzaminas);
+            }
+            else if (pasirinkimas == "P") {
+                std::sort(blogi.begin(), blogi.end(), palyginti_pavarde);
+                std::sort(geri.begin(), geri.end(), palyginti_pavarde);
+            }
+            else if (pasirinkimas == "M") {
+                std::sort(blogi.begin(), blogi.end(), palyginti_mediana);
+                std::sort(geri.begin(), geri.end(), palyginti_mediana);
+            }
 
             cout << "Duomenu rusiavimas: " << t.elapsed() << endl;
 
@@ -52,7 +65,6 @@ int main() {
             cout << "Viso: " << tv.elapsed() << endl << endl;
         }
         else {
-
             int n;
             cout << "Studentu skaicius: ";
             cin >> n;
@@ -96,8 +108,6 @@ int main() {
                     cout << "Egzamino pazymis: ";
                     cin >> laikinas.egzaminas;
                 }
-
-
                 laikinas.galutinis = galutinio_sk(vidurkis(laikinas.pazymiai), laikinas.egzaminas);
                 laikinas.galutinis = round(laikinas.galutinis * 100) / 100;
                 laikinas.galutinis_mediana = galutinio_sk(mediana(laikinas.pazymiai), laikinas.egzaminas);

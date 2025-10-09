@@ -38,12 +38,9 @@ bool palyginti(studentas, studentas);
 bool palyginti_egzaminas(studentas, studentas);
 bool palyginti_mediana(studentas, studentas);
 bool palyginti_pavarde(studentas, studentas);
-void rusiuojam(vector<studentas>, int);
+
 
 std::stringstream failo_skaitimas(string);
 studentas studentas_uzpildimas(string);
-
-bool geri_funk(studentas);
-bool blogi_funk(studentas);
 
 class timer;

@@ -1,15 +1,5 @@
 #include "main.h"
 
-void rusiuojam(vector<studentas> x, int y) {
-    switch (y) {
-    case 1:
-        std::sort(x.begin(), x.end(), palyginti_egzaminas);
-    case 2:
-        std::sort(x.begin(), x.end(), palyginti_pavarde);
-    case 3:
-        std::sort(x.begin(), x.end(), palyginti_mediana);
-    }
-}
 
 studentas studentas_uzpildimas(string eil) {
     studentas laikinas;
@@ -23,6 +13,7 @@ studentas studentas_uzpildimas(string eil) {
     }
     laikinas.egzaminas = laikinas.pazymiai.back();
     laikinas.pazymiai.pop_back();
+    laikinas.pazymiai.resize(laikinas.pazymiai.size());
 
     laikinas.galutinis = round(galutinio_sk(vidurkis(laikinas.pazymiai), laikinas.egzaminas) * 100) / 100;
     laikinas.galutinis_mediana = galutinio_sk(mediana(laikinas.pazymiai), laikinas.egzaminas);
@@ -162,13 +153,7 @@ bool palyginti_mediana(studentas a, studentas b) {
     return a.galutinis_mediana > b.galutinis_mediana;
 }
 
-bool geri_funk(studentas x) {
-    return x.galutinis >= 5.0;
-}
 
-bool blogi_funk(studentas x) {
-    return x.galutinis < 5.0;
-}
 
 class timer {
     using hrClock = std::chrono::high_resolution_clock;
