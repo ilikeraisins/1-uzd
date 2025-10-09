@@ -45,3 +45,5 @@ studentas studentas_uzpildimas(string);
 
 bool geri_funk(studentas);
 bool blogi_funk(studentas);
+
+class timer;
