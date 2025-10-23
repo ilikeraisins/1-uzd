@@ -1,6 +1,8 @@
 ﻿#include "main.h"
 #include "mylib.cpp"
 
+
+
 int main() {
     string pasirinkimas;
     cout << "Duomenis skaityti ar generuoti? (S/G) " << endl;
@@ -16,16 +18,13 @@ int main() {
             string eil;
 
             timer t;
-            std::stringstream buffer = failo_skaitimas("C:\\Users\\Monika\\source\\repos\\main\\main\\10000000studentai.txt");
+            std::stringstream buffer = failo_skaitimas("C:\\Users\\Monika\\source\\repos\\main\\main\\10000studentai.txt");
             cout << "Failo nuskaitymas: " << t.elapsed() << endl;
           
             std::getline(buffer, eil);
 
-            vector<studentas> geri ;
-            vector<studentas> blogi;
-
             cout << endl << "Be to, kad studentai rusiuojami pagal varda ir galutini pazymi, pagal ka dar rusiuoti? " << endl;
-            cout << "(E - egzamino pazymi, P - pavarde, M - galutini pazymi pagal mediana)" << endl;
+            cout << "(G - galutini pazymi, P - pavarde, M - galutini pazymi pagal mediana)" << endl;
             cin >> pasirinkimas;
 
             t.reset();
@@ -33,34 +32,36 @@ int main() {
                 if (!buffer.eof()) {
                     std::getline(buffer, eil);
                     studentas laikinas = studentas_uzpildimas(eil);
-                    if (laikinas.galutinis >= 5.0) {
-                        geri.push_back(laikinas);
-                    }
-                    else {
-                        blogi.push_back(laikinas);
-                    }
+                    grupe.push_back(laikinas);
                 }
                 else break;
             };
 
-            if (pasirinkimas == "E") {
-                std::sort(blogi.begin(), blogi.end(), palyginti_egzaminas);
-                std::sort(geri.begin(), geri.end(), palyginti_egzaminas);
+          
+            vector<studentas> geri(grupe.size());
+            vector<studentas> blogi(grupe.size());
+
+            copy_if(grupe.begin(), grupe.end(), blogi.begin(), [](studentas x) {return x.galutinis < 5; });
+            copy_if(grupe.begin(), grupe.end(), geri.begin(), [](studentas x) {return x.galutinis >= 5; });
+
+            if (pasirinkimas == "V") {
+                std::sort(blogi.begin(), blogi.end(), palyginti_vardas);
+                std::sort(geri.begin(), geri.end(), palyginti_vardas);
             }
             else if (pasirinkimas == "P") {
                 std::sort(blogi.begin(), blogi.end(), palyginti_pavarde);
                 std::sort(geri.begin(), geri.end(), palyginti_pavarde);
             }
-            else if (pasirinkimas == "M") {
-                std::sort(blogi.begin(), blogi.end(), palyginti_mediana);
-                std::sort(geri.begin(), geri.end(), palyginti_mediana);
+            else if (pasirinkimas == "G") {
+                std::sort(blogi.begin(), blogi.end(), palyginti_galutinis);
+                std::sort(geri.begin(), geri.end(), palyginti_galutinis);
             }
 
             cout << "Duomenu rusiavimas: " << t.elapsed() << endl;
 
             t.reset();
-            rasymas_i_faila(geri, "C:\\Users\\Monika\\source\\repos\\main\\main\\GeraiBesimokantys.txt");
-            rasymas_i_faila(blogi, "C:\\Users\\Monika\\source\\repos\\main\\main\\BlogaiBesimokantys.txt");
+            rasymas_i_faila(geri, "C:\\Users\\Monika\\source\\repos\\main\\main\\geri.txt");
+            rasymas_i_faila(blogi, "C:\\Users\\Monika\\source\\repos\\main\\main\\blogi.txt");
             cout << "Failu isvedimas: " << t.elapsed() << endl << endl;
             cout << "Viso: " << tv.elapsed() << endl << endl;
         }
@@ -125,6 +126,6 @@ int main() {
         generuoti_failus(10000, 5, "C:\\Users\\Monika\\source\\repos\\main\\main\\10000studentai.txt");
         generuoti_failus(100000, 5, "C:\\Users\\Monika\\source\\repos\\main\\main\\100000studentai.txt");
         generuoti_failus(1000000, 5, "C:\\Users\\Monika\\source\\repos\\main\\main\\1000000studentai.txt");
-        generuoti_failus(10000000, 5, "C:\\Users\\Monika\\source\\repos\\main\\main\\10000000studentai.txt");
+        //generuoti_failus(10000000, 5, "C:\\Users\\Monika\\source\\repos\\main\\main\\10000000studentai.txt");
     }
 }

@@ -35,7 +35,7 @@ void rasymas_i_faila(vector<studentas> x, string failo_vardas) {
     string visas;
     string galut_v;
     string galut_m;
-    for (int i = 0; i < x.size(); i++) {
+    for (size_t i = 0; i < x.size(); i++) {
         studentas laik = x[i];
         galut_v = std::to_string(laik.galutinis).substr(0,4);
         galut_m = std::to_string(laik.galutinis_mediana).substr(0,4);
@@ -51,23 +51,23 @@ void lentele(vector<studentas> x, string y) {
     cout << setw(15) << left << "Vardas" << setw(15) << left << "Pavarde" << setw(15) << right;
     if (y == "V") {
         cout << "Galutinis pazymis(Vid.)" << endl;
-        for (int m = 0; m < x.size(); m++) {
+        for (size_t m = 0; m < x.size(); m++) {
             cout << setw(15) << left << x[m].vardas << setw(15) << left << x[m].pavarde << setw(17) << right << x[m].galutinis << endl;
         }
     }
     else if (y == "M") {
         cout << "Galutinis pazymis(Median.)" << endl;
-        for (int m = 0; m < x.size(); m++) {
+        for (size_t m = 0; m < x.size(); m++) {
             cout << setw(15) << left << x[m].vardas << setw(15) << left << x[m].pavarde << setw(17) << right << x[m].galutinis_mediana << endl;
         }
     }
     else if (y == "A") {
         cout << "Galutinis pazymis(Vid.) Galutinis pazymis(Median.)" << endl;
-        for (int a = 0; a < 80; a++) {
+        for (size_t a = 0; a < 80; a++) {
             cout << "-";
         }
         cout << endl;
-        for (int m = 0; m < x.size(); m++) {
+        for (size_t m = 0; m < x.size(); m++) {
             cout << setw(15) << left << x[m].vardas << setw(15) << left << x[m].pavarde << setw(24) << left << x[m].galutinis << left << x[m].galutinis_mediana << endl;
         }
     }
@@ -97,7 +97,7 @@ void generuoti_failus(int studentu_sk, int darbu_sk, string failo_vardas) {
 double mediana(vector<int> x) {
     sort(x.begin(), x.end());
 
-    int n = x.size();
+    size_t n = x.size();
     if (n % 2 == 0) {
         return (double)(x[(n - 1) / 2] + x[n / 2]) / 2.0;
     }
@@ -106,7 +106,7 @@ double mediana(vector<int> x) {
 
 double vidurkis(vector<int> x) {
     double suma = 0;
-    for (int i = 0; i < x.size(); i++) {
+    for (size_t i = 0; i < x.size(); i++) {
         suma = suma + double(x[i]);
     }
     return suma / x.size();
@@ -123,36 +123,17 @@ bool palyginti(studentas a, studentas b) {
     return a.galutinis > b.galutinis;
 }
 
-bool palyginti_egzaminas(studentas a, studentas b) {
-    if (a.vardas != b.vardas) {
-        return a.vardas > b.vardas;
-    }
-    if (a.galutinis != b.galutinis) {
-        return a.galutinis > b.galutinis;
-    }
-    return a.egzaminas > b.egzaminas;
+bool palyginti_vardas(studentas a, studentas b) {
+    return a.vardas > b.vardas;
 }
 
 bool palyginti_pavarde(studentas a, studentas b) {
-    if (a.vardas != b.vardas) {
-        return a.vardas > b.vardas;
-    }
-    if (a.galutinis != b.galutinis) {
-        return a.galutinis > b.galutinis;
-    }
     return a.pavarde > b.pavarde;
 }
 
-bool palyginti_mediana(studentas a, studentas b) {
-    if (a.vardas != b.vardas) {
-        return a.vardas > b.vardas;
-    }
-    if (a.galutinis != b.galutinis) {
-        return a.galutinis > b.galutinis;
-    }
-    return a.galutinis_mediana > b.galutinis_mediana;
+bool palyginti_galutinis(studentas a, studentas b) {
+    return a.galutinis > b.galutinis;
 }
-
 
 
 class timer {
