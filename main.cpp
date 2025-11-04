@@ -78,10 +78,9 @@ int main() {
                 cin >> laikinas.pavarde;
 
                 cout << "Pazymius ivedami ar generuojami? (V/G) " << endl;
-                string pasirinkimas1;
-                cin >> pasirinkimas1;
+                cin >> pasirinkimas;
 
-                if (pasirinkimas1 == "G") {
+                if (pasirinkimas == "G") {
                     int sk;
 
                     std::random_device seed;
@@ -114,7 +113,6 @@ int main() {
                 grupe.push_back(laikinas);
             }
 
-            string pasirinkimas;
             cout << "Vesti lentele su vidurkiu, mediana arba abeim? (V/M/A): ";
             cin >> pasirinkimas;
             lentele(grupe, pasirinkimas);
