@@ -94,14 +94,28 @@ void generuoti_failus(int studentu_sk, int darbu_sk, string failo_vardas) {
     file.close();
 }
 
-double mediana(vector<int> x) {
-    sort(x.begin(), x.end());
-
+double mediana(list<int> x) {
+    x.sort();
     size_t n = x.size();
+    int med = 0;
+    int i = 0;
     if (n % 2 == 0) {
-        return (double)(x[(n - 1) / 2] + x[n / 2]) / 2.0;
+        for (int sk : x) {
+            i++;
+            if (i == n/2 or i == n/2+1) {
+                med += sk;
+            }
+        }
+        return (double)med / 2;
+    } else {
+        for (int sk : x) {
+            i++;
+            if (i == n+1 / 2) {
+                med += sk;
+            }
+        }
+        return (double)med;
     }
-    return (double)x[n / 2];
 }
 
 double vidurkis(vector<int> x) {
