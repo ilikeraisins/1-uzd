@@ -1,14 +1,13 @@
 ﻿#include "main.h"
 #include "mylib.cpp"
 
-
 int main() {
     string pasirinkimas;
     cout << "Duomenis skaityti ar generuoti? (S/G) " << endl;
     cin >> pasirinkimas;
 
     if (pasirinkimas == "S") {
-        vector<studentas> grupe;
+        list<studentas> grupe;
         cout << "Ar duomenis gauti is failo? (T/N) " << endl;
         cin >> pasirinkimas;
 
@@ -37,23 +36,23 @@ int main() {
             };
 
           
-            vector<studentas> geri(grupe.size());
-            vector<studentas> blogi(grupe.size());
+            list<studentas> geri(grupe.size());
+            list<studentas> blogi(grupe.size());
 
             copy_if(grupe.begin(), grupe.end(), blogi.begin(), [](studentas x) {return x.galutinis < 5; });
             copy_if(grupe.begin(), grupe.end(), geri.begin(), [](studentas x) {return x.galutinis >= 5; });
 
             if (pasirinkimas == "V") {
-                std::sort(blogi.begin(), blogi.end(), palyginti_vardas);
-                std::sort(geri.begin(), geri.end(), palyginti_vardas);
+                blogi.sort(palyginti_vardas);
+                geri.sort(palyginti_vardas);
             }
             else if (pasirinkimas == "P") {
-                std::sort(blogi.begin(), blogi.end(), palyginti_pavarde);
-                std::sort(geri.begin(), geri.end(), palyginti_pavarde);
+                blogi.sort(palyginti_pavarde);
+                geri.sort(palyginti_pavarde);
             }
             else if (pasirinkimas == "G") {
-                std::sort(blogi.begin(), blogi.end(), palyginti_galutinis);
-                std::sort(geri.begin(), geri.end(), palyginti_galutinis);
+                blogi.sort(palyginti_galutinis);
+                geri.sort(palyginti_galutinis);
             }
 
             cout << "Duomenu rusiavimas: " << t.elapsed() << endl;
