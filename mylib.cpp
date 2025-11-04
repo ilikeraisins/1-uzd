@@ -50,25 +50,25 @@ void lentele(vector<studentas> x, string y) {
     std::sort(x.begin(), x.end(), palyginti);
     cout << setw(15) << left << "Vardas" << setw(15) << left << "Pavarde" << setw(15) << right;
     if (y == "V") {
-        cout << "Galutinis pazymis(Vid.)" << endl;
+        cout << "Galutinis pazymis(Vid.)" << setw(40) << right << "Objekto saugojimo atmintyje adresas" << endl;
         for (size_t m = 0; m < x.size(); m++) {
-            cout << setw(15) << left << x[m].vardas << setw(15) << left << x[m].pavarde << setw(17) << right << x[m].galutinis << endl;
+            cout << setw(15) << left << x[m].vardas << setw(15) << left << x[m].pavarde << setw(17) << right << x[m].galutinis << setw(44) << right << &x[m] << endl;
         }
     }
     else if (y == "M") {
-        cout << "Galutinis pazymis(Median.)" << endl;
+        cout << "Galutinis pazymis(Median.)" << setw(40) << right << "Objekto saugojimo atmintyje adresas" << endl;
         for (size_t m = 0; m < x.size(); m++) {
-            cout << setw(15) << left << x[m].vardas << setw(15) << left << x[m].pavarde << setw(17) << right << x[m].galutinis_mediana << endl;
+            cout << setw(15) << left << x[m].vardas << setw(15) << left << x[m].pavarde << setw(17) << right << x[m].galutinis_mediana << setw(44) << right << &x[m] << endl;
         }
     }
     else if (y == "A") {
-        cout << "Galutinis pazymis(Vid.) Galutinis pazymis(Median.)" << endl;
-        for (size_t a = 0; a < 80; a++) {
+        cout << "Galutinis pazymis(Vid.) Galutinis pazymis(Median.)" << setw(40) << right << "Objekto saugojimo atmintyje adresas" << endl;
+        for (size_t a = 0; a < 120; a++) {
             cout << "-";
         }
         cout << endl;
         for (size_t m = 0; m < x.size(); m++) {
-            cout << setw(15) << left << x[m].vardas << setw(15) << left << x[m].pavarde << setw(24) << left << x[m].galutinis << left << x[m].galutinis_mediana << endl;
+            cout << setw(15) << left << x[m].vardas << setw(15) << left << x[m].pavarde << setw(24) << left << x[m].galutinis << left << x[m].galutinis_mediana << setw(44) << right << &x[m] << endl;
         }
     }
 }
