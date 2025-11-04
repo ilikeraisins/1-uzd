@@ -9,6 +9,8 @@
 #include <sstream>
 #include <chrono>
 
+#include <list>
+
 using std::cout;
 using std::cin;
 using std::endl;
@@ -18,10 +20,12 @@ using std::left;
 using std::right;
 using std::vector;
 
+using std::list;
+
 struct studentas {
-    std::string vardas;
-    std::string pavarde;
-    std::vector<int> pazymiai;
+    string vardas;
+    string pavarde;
+    list<int> pazymiai;
     int egzaminas;
     double galutinis;
     double galutinis_mediana;
