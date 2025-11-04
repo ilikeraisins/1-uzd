@@ -2,7 +2,6 @@
 #include "mylib.cpp"
 
 
-
 int main() {
     string pasirinkimas;
     cout << "Duomenis skaityti ar generuoti? (S/G) " << endl;
@@ -14,18 +13,18 @@ int main() {
         cin >> pasirinkimas;
 
         if (pasirinkimas == "T") {
+            cout << endl << "Be to, kad studentai rusiuojami pagal varda ir galutini pazymi, pagal ka dar rusiuoti? " << endl;
+            cout << "(G - galutini pazymi, P - pavarde, V - varda)" << endl;
+            cin >> pasirinkimas;
+
             timer tv;
             string eil;
 
             timer t;
-            std::stringstream buffer = failo_skaitimas("C:\\Users\\Monika\\source\\repos\\main\\main\\10000studentai.txt");
+            std::stringstream buffer = failo_skaitimas("10000000studentai.txt");
             cout << "Failo nuskaitymas: " << t.elapsed() << endl;
           
             std::getline(buffer, eil);
-
-            cout << endl << "Be to, kad studentai rusiuojami pagal varda ir galutini pazymi, pagal ka dar rusiuoti? " << endl;
-            cout << "(G - galutini pazymi, P - pavarde, M - galutini pazymi pagal mediana)" << endl;
-            cin >> pasirinkimas;
 
             t.reset();
             while (buffer) {
@@ -60,8 +59,9 @@ int main() {
             cout << "Duomenu rusiavimas: " << t.elapsed() << endl;
 
             t.reset();
-            rasymas_i_faila(geri, "C:\\Users\\Monika\\source\\repos\\main\\main\\geri.txt");
-            rasymas_i_faila(blogi, "C:\\Users\\Monika\\source\\repos\\main\\main\\blogi.txt");
+            rasymas_i_faila(geri, "GeraiBesimokantys.txt");
+            rasymas_i_faila(blogi, "BlogaiBesimokantys.txt");
+
             cout << "Failu isvedimas: " << t.elapsed() << endl << endl;
             cout << "Viso: " << tv.elapsed() << endl << endl;
         }
