@@ -31,12 +31,11 @@ std::stringstream failo_skaitimas(string failo_vardas) {
     return buffer;
 }
 
-void rasymas_i_faila(vector<studentas> x, string failo_vardas) {
+void rasymas_i_faila(list<studentas> x, string failo_vardas) {
     string visas;
     string galut_v;
     string galut_m;
-    for (size_t i = 0; i < x.size(); i++) {
-        studentas laik = x[i];
+    for (studentas laik: x) {
         galut_v = std::to_string(laik.galutinis).substr(0,4);
         galut_m = std::to_string(laik.galutinis_mediana).substr(0,4);
         visas += laik.vardas + " " + laik.pavarde + " " + galut_v + " " + galut_m + "\n";
