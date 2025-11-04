@@ -31,12 +31,12 @@ struct studentas {
     double galutinis_mediana;
 };
 
-double mediana(vector<int>);
-double vidurkis(vector<int>);
-void lentele(vector<studentas>, string);
+double mediana(list<int>);
+double vidurkis(list<int>);
+void lentele(list<studentas>, string);
 double galutinio_sk(double, int);
 void generuoti_failus(int, int,string);
-void rasymas_i_faila(vector<studentas>, string);
+void rasymas_i_faila(list<studentas>, string);
 
 bool palyginti(studentas, studentas);
 bool palyginti_egzaminas(studentas, studentas);

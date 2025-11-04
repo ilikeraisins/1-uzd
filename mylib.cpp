@@ -1,5 +1,37 @@
 #include "main.h"
 
+double mediana(list<int> x) {
+    x.sort();
+    size_t n = x.size();
+    int med = 0;
+    int i = 0;
+    if (n % 2 == 0) {
+        for (int sk : x) {
+            i++;
+            if (i == n / 2 or i == n / 2 + 1) {
+                med += sk;
+            }
+        }
+        return (double)med / 2;
+    }
+    else {
+        for (int sk : x) {
+            i++;
+            if (i == n + 1 / 2) {
+                med += sk;
+            }
+        }
+        return (double)med;
+    }
+}
+
+double vidurkis(list<int> x) {
+    int suma = 0;
+    for (int sk : x) {
+        suma = suma + sk;
+    }
+    return (double)suma / x.size();
+}
 
 studentas studentas_uzpildimas(string eil) {
     studentas laikinas;
@@ -91,38 +123,6 @@ void generuoti_failus(int studentu_sk, int darbu_sk, string failo_vardas) {
     std::ofstream file(failo_vardas);
     file << visas;
     file.close();
-}
-
-double mediana(list<int> x) {
-    x.sort();
-    size_t n = x.size();
-    int med = 0;
-    int i = 0;
-    if (n % 2 == 0) {
-        for (int sk : x) {
-            i++;
-            if (i == n/2 or i == n/2+1) {
-                med += sk;
-            }
-        }
-        return (double)med / 2;
-    } else {
-        for (int sk : x) {
-            i++;
-            if (i == n+1 / 2) {
-                med += sk;
-            }
-        }
-        return (double)med;
-    }
-}
-
-double vidurkis(list<int> x) {
-    int suma = 0;
-    for (int sk: x) {
-        suma = suma + sk;
-    }
-    return (double)suma / x.size();
 }
 
 double galutinio_sk(double x, int y) {
