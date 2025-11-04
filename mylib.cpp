@@ -46,19 +46,19 @@ void rasymas_i_faila(vector<studentas> x, string failo_vardas) {
     out_f.close();
 }
 
-void lentele(vector<studentas> x, string y) {
-    std::sort(x.begin(), x.end(), palyginti);
+void lentele(list<studentas> x, string y) {
+    x.sort(palyginti);
     cout << setw(15) << left << "Vardas" << setw(15) << left << "Pavarde" << setw(15) << right;
     if (y == "V") {
         cout << "Galutinis pazymis(Vid.)" << setw(40) << right << "Objekto saugojimo atmintyje adresas" << endl;
-        for (size_t m = 0; m < x.size(); m++) {
-            cout << setw(15) << left << x[m].vardas << setw(15) << left << x[m].pavarde << setw(17) << right << x[m].galutinis << setw(44) << right << &x[m] << endl;
+        for (studentas laik: x) {
+            cout << setw(15) << left << laik.vardas << setw(15) << left << laik.pavarde << setw(17) << right << laik.galutinis << setw(44) << right << &laik << endl;
         }
     }
     else if (y == "M") {
         cout << "Galutinis pazymis(Median.)" << setw(40) << right << "Objekto saugojimo atmintyje adresas" << endl;
-        for (size_t m = 0; m < x.size(); m++) {
-            cout << setw(15) << left << x[m].vardas << setw(15) << left << x[m].pavarde << setw(17) << right << x[m].galutinis_mediana << setw(44) << right << &x[m] << endl;
+        for (studentas laik: x) {
+            cout << setw(15) << left << laik.vardas << setw(15) << left << laik.pavarde << setw(17) << right << laik.galutinis_mediana << setw(44) << right << &laik << endl;
         }
     }
     else if (y == "A") {
@@ -67,8 +67,8 @@ void lentele(vector<studentas> x, string y) {
             cout << "-";
         }
         cout << endl;
-        for (size_t m = 0; m < x.size(); m++) {
-            cout << setw(15) << left << x[m].vardas << setw(15) << left << x[m].pavarde << setw(24) << left << x[m].galutinis << left << x[m].galutinis_mediana << setw(44) << right << &x[m] << endl;
+        for (studentas laik: x) {
+            cout << setw(15) << left << laik.vardas << setw(15) << left << laik.pavarde << setw(24) << left << laik.galutinis << left << laik.galutinis_mediana << setw(44) << right << &laik << endl;
         }
     }
 }
@@ -118,12 +118,12 @@ double mediana(list<int> x) {
     }
 }
 
-double vidurkis(vector<int> x) {
-    double suma = 0;
-    for (size_t i = 0; i < x.size(); i++) {
-        suma = suma + double(x[i]);
+double vidurkis(list<int> x) {
+    int suma = 0;
+    for (int sk: x) {
+        suma = suma + sk;
     }
-    return suma / x.size();
+    return (double)suma / x.size();
 }
 
 double galutinio_sk(double x, int y) {
