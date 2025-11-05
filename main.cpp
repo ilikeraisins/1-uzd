@@ -7,6 +7,7 @@ int main() {
     cin >> pasirinkimas;
 
     if (pasirinkimas == "S") {
+        //vector<studentas> grupe;
         list<studentas> grupe;
         cout << "Ar duomenis gauti is failo? (T/N) " << endl;
         cin >> pasirinkimas;
