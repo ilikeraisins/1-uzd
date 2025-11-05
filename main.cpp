@@ -20,7 +20,7 @@ int main() {
             string eil;
 
             timer t;
-            std::stringstream buffer = failo_skaitimas("1000studentai.txt");
+            std::stringstream buffer = failo_skaitimas("10000000studentai.txt");
             cout << "Failo nuskaitymas: " << t.elapsed() << endl;
           
             std::getline(buffer, eil);
