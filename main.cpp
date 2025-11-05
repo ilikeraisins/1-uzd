@@ -37,15 +37,16 @@ int main() {
             };
 
           
-            list<studentas> geri(grupe.size());
+            //list<studentas> geri(grupe.size());
             list<studentas> blogi(grupe.size());
 
             copy_if(grupe.begin(), grupe.end(), blogi.begin(), [](studentas x) {return x.galutinis < 5; });
-            copy_if(grupe.begin(), grupe.end(), geri.begin(), [](studentas x) {return x.galutinis >= 5; });
+            grupe.erase(std::remove_if(grupe.begin(), grupe.end(), [](studentas x) {return x.galutinis < 5; }));
+            //copy_if(grupe.begin(), grupe.end(), geri.begin(), [](studentas x) {return x.galutinis >= 5; });
 
             if (pasirinkimas == "V") {
                 blogi.sort(palyginti_vardas);
-                geri.sort(palyginti_vardas);
+                geri.sort();
             }
             else if (pasirinkimas == "P") {
                 blogi.sort(palyginti_pavarde);
