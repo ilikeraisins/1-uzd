@@ -8,6 +8,7 @@
 #include <fstream>
 #include <sstream>
 #include <chrono>
+#include <vector>
 #include <list>
 
 using std::cout;
@@ -18,23 +19,25 @@ using std::setw;
 using std::left;
 using std::right;
 using std::list;
+using std::vector;
 
 struct studentas {
     string vardas;
     string pavarde;
+    //vector<int>pazymiai;
     list<int> pazymiai;
     int egzaminas;
     double galutinis;
     double galutinis_mediana;
 };
 
-double mediana(list<int>);
-double vidurkis(list<int>);
+double mediana(/*vector<int>*/ list<int>);
+double vidurkis(/*vector<int>*/ list<int>);
 
-void lentele(list<studentas>, string);
+void lentele(/*vector<studentas*/ list<studentas>, string);
 double galutinio_sk(double, int);
 void generuoti_failus(int, int,string);
-void rasymas_i_faila(list<studentas>, string);
+void rasymas_i_faila(/*vector<studentas>*/ list<studentas>, string);
 
 bool palyginti(studentas, studentas);
 bool palyginti_egzaminas(studentas, studentas);
