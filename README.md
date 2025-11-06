@@ -35,8 +35,15 @@ Testavimas:
 |---------------|-------------------------|-----------------------------------------|---------------------------------|---------------|
 
 Pazydžiai:
-    1. 1000
-    <img width="1547" height="792" alt="vector 1000" src="https://github.com/user-attachments/assets/67bd7bcb-2ece-4831-87b2-998d887c6747" />
+
+1000 irašų:
+
+<img width="1178" height="447" alt="vector 1000-1" src="https://github.com/user-attachments/assets/ea386d32-21cf-4fe3-81b0-642aa1384ec1" />
+
+10000000 irašų:
+
+<img width="1175" height="474" alt="vecctor 10000000" src="https://github.com/user-attachments/assets/b6163ef0-777e-49f4-b211-c2f98698793e" />
+
 
 
 
@@ -60,4 +67,16 @@ Pazydžiai:
 |10000000       | 3.112888                | 249.0134                                | 58.9834                         | 311.1538      |
 
 |---------------|-------------------------|-----------------------------------------|---------------------------------|---------------|
+
+
+Pavyzdžiai:
+
+1000 irašų:
+
+<img width="1165" height="474" alt="list 1000" src="https://github.com/user-attachments/assets/167ed565-c5b3-4909-b242-9b1e8aced9b9" />
+
+10000000 irašų:
+
+<img width="1182" height="478" alt="list 10000000" src="https://github.com/user-attachments/assets/d0a59e69-aae6-4dba-ac6b-3b78b3cf9517" />
+
 
