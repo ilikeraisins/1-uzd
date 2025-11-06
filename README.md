@@ -1,13 +1,51 @@
 # Objektinis-programavimas
 
+Releasai:
+
+1. v.pradine - sudaro, tik rankinis studentų duomenų įvedimas main.cpp faile;
+2. v.pradine2 - pridėta galimybė generuoti atsitiktinius pažymius kiekvienam įvedamam studentui;
+3. v0.1 - pridėta galimybė skaityti duomenis iš failo;
+4. v0.2 - projektas išskaidytas į main.cpp, mylib.cpp ir main.h failus, pridėta galimybė generuoti failus, o skaitant iš failo studentus suskirstyti į dvi grupes, bei juo išrikiuoti pagal pasirinkta parametrą;
+5. v0.3 - testuotas ir README.md faile aprašytas programos veikimas naudojant std::vector ir std::list konteinerius;
+6. v1.0 - testuotas ir README.md faile aprašytas programos veikimas pagal 3 studentų suskirstymo į dvi grupes strategijas.
+
+Naudojimo instrukcija:
+
+1. Paleisti programa;
+2. Pasirinkti ar duomenis skaityti ar generuoti failus su duomenimis:
+	1) įvedus S pasirenkama skaityti duomenis;
+		3. Pasirinkti ar duomenis skaityti iš failo ar įvesti juo ranka:
+			1) įvedus T pasirenkama skaityti duomenis iš failo, kurie bus apdoroti ir išvedami į du skirtingus failus pagal studento galutini pažymį:,,GeraiBesimokantis" ir ,,BlogaiBesimokantys";
+				4. Pasirinkti pagal kokį parametrą bus surūšiuoti duomenis išvedus juos į du skirtingus failus:
+					1) įvedus G duomenys bus surūšiuoti pagal studentų galutinius pažymius;
+					2) įvedus V duomenys bus surūšiuoti pagal studentų vardus;
+					3) įvedus P duomenys bus surūšiuoti pagal studentų pavardes;
+				5. Ekrane pasirodo programos veikimo etapų trukmės ir yra sukuriami failai ,,GeraiBesimokantis" ir ,,BlogaiBesimokantys";
+			2) įvedus N pasirenkama duomenis vesti ranka;
+				4. Įvedamas skaičius studentų, kurių duomenis norima įvesti;
+				5. Kartojama įvesto studentų skaičiaus kartų:
+				6. įvesti studento vardas;
+				7. įvesti studento pavardė;
+				8. pasirinkti ar studento pažymius vesti vienas po kito ar generuoti:
+					1) įvedus V pasirenkama vesti pažymius vienas po kito:
+						9. įvedinėjami pažymiai, įvedus 0 nustojama vesti;
+						10. įvesti studento egzamino pažymį;
+					2) įvedus G pasirenkama generuoti atsitiktinius pažymius;
+				11. žingsniai 6-10 kartojami įvesto studentų skaičiau kartų;
+				12. pasirinkti ar studentų suvestinės lentelėje bus studentų galutinis rezultatas skaičiuojamas pagal pažymių vidurkį, medianą ar abu;
+					1) įvedus V lentelėje pasirodys rezultatas pagal vidurkį;
+					2) įvedus M lentelėje pasirodys rezultatas pagal medianą;
+					3) įvedus A lentelėje pasirodys rezultatai pagal abu skaičius;
+				12. Išvedama studentų suvestinė su studentų vardais, pavardėmis ir pasirinktų galutiniu pažymiu; 
+	2) įvedus G pasirenkama generuoti failus su duomenimis;
+		3. Sugeneruojami failai su 1000, 10000, 100000, 1000000 ir 10000000 studentų duomenimis.
 
 
-Sistemos parametrai:
+Testavimo sistemos parametrai:
 
 * Intel(R) Core(TM) i5-9300HF CPU @ 2.40GHz (2.40 GHz);
 * 8 GB RAM;
 * SSD.
-
 
 
 Testavimas:
@@ -105,7 +143,7 @@ Pavyzdžiai:
 
 
 
-2) 2)Naudojant std::list konteinerį trukmės vidurkiai:
+ 2)Naudojant std::list konteinerį trukmės vidurkiai:
 
 
 
@@ -121,8 +159,38 @@ Pavyzdžiai:
 
 |1000000        | 0.298025                | 21.57356                                | 2.515094                        | 24,3888       |
 
-|10000000       | 
+|10000000       | 3.094384                | 259.643                                 | 34.89186                        | 297.65        |
 
 |---------------|-------------------------|-----------------------------------------|---------------------------------|---------------|
+
+
+
+3 strategija naudojant tik std::vector konteinerį:
+
+
+|Įrašų skaičius | Failo nuskaitymo trukmė | Duomenų surūšiavimo į dvi grupes trukmė | Duomenų įrašymo į failus trukmė | Viso          |
+
+|---------------|-------------------------|-----------------------------------------|---------------------------------|---------------|
+
+|1000           | 0.0007766               | 0.0045559                               | 0.0110817                       | 0,0181108     |
+
+|10000          | 0.0042033               | 0.0369678                               | 0.0299963                       | 0.0584091     |
+
+|100000         | 0.0305568               | 0.3589148                               | 0.1392758                       | 0.5306948     |
+
+|1000000        | 0.3037752               | 3.949376                                | 1.413016                        | 5.6665        |
+
+|10000000       | 3.247136                | 42.29478                                | 15.86184                        | 61.40678      |
+
+|---------------|-------------------------|-----------------------------------------|---------------------------------|---------------|
+
+
+Testavimo išvados:
+
+1. Programa veikia sparčiau naudojant std::vector konteinerį negu std::list;
+2. 3 strategija, kai naudojami tam tikri konteinerių metodai, šiek tiek spartesnė už kitas strategijas;
+3. 1 ir 2 strategijų spartos žymiai nesiskiria.
+
+
 
 

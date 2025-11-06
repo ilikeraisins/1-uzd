@@ -34,15 +34,15 @@ struct studentas {
 double mediana(vector<int> /*list<int>*/);
 double vidurkis(/*list<int>*/ vector<int>);
 
-void lentele(vector<studentas /*list<studentas>, string*/);
+void lentele(vector<studentas> /*list<studentas>*/, string);
 double galutinio_sk(double, int);
 void generuoti_failus(int, int,string);
 void rasymas_i_faila(vector<studentas> /*list<studentas>*/, string);
 
 bool palyginti(studentas, studentas);
-bool palyginti_egzaminas(studentas, studentas);
-bool palyginti_mediana(studentas, studentas);
+bool palyginti_vardas(studentas, studentas);
 bool palyginti_pavarde(studentas, studentas);
+bool palyginti_galutinis(studentas, studentas);
 
 std::stringstream failo_skaitimas(string);
 studentas studentas_uzpildimas(string);
