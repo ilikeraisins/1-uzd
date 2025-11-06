@@ -21,7 +21,7 @@ int main() {
             string eil;
 
             timer t;
-            std::stringstream buffer = failo_skaitimas("10000000studentai.txt");
+            std::stringstream buffer = failo_skaitimas("1000000studentai.txt");
             cout << "Failo nuskaitymas: " << t.elapsed() << endl;
           
             std::getline(buffer, eil);
@@ -36,31 +36,58 @@ int main() {
                 else break;
             };
 
-          
-            //list<studentas> geri(grupe.size());
-            list<studentas> blogi(grupe.size());
+            //1 strategija
 
-            copy_if(grupe.begin(), grupe.end(), blogi.begin(), [](studentas x) {return x.galutinis < 5; });
-            grupe.erase(std::remove_if(grupe.begin(), grupe.end(), [](studentas x) {return x.galutinis < 5; }));
-            //copy_if(grupe.begin(), grupe.end(), geri.begin(), [](studentas x) {return x.galutinis >= 5; });
+            /*list<studentas> geri;
+            list<studentas> blogi;
 
+            copy_if(grupe.begin(), grupe.end(), blogi.begin(), [](studentas x) {return x.galutinis < 5.0; });
+            copy_if(grupe.begin(), grupe.end(), geri.begin(), [](studentas x) {return x.galutinis >= 5; });
+            */
+
+            //2 strategija
+
+            list<studentas> blogi;
+            grupe.sort(palyginti_galutinis);
+
+            int k = 0;
+            for (studentas h : grupe) {
+                if (h.galutinis < 5.0) {
+                    blogi.push_back(h);
+                    k++;
+                }
+            }
+            grupe.resize(grupe.size() - k);
+            
             if (pasirinkimas == "V") {
-                blogi.sort(palyginti_vardas);
-                geri.sort();
+                //blogi.sort(palyginti_vardas);
+                grupe.sort(palyginti_vardas);
+                //geri.sort(palyginti_vardas);
+                //std::sort(blogi.begin(), blogi.end(), palyginti_vardas);
+                //std::sort(geri.begin(), geri.end(), palyginti_vardas);
             }
             else if (pasirinkimas == "P") {
-                blogi.sort(palyginti_pavarde);
-                geri.sort(palyginti_pavarde);
+                //blogi.sort(palyginti_pavarde);
+                grupe.sort(palyginti_pavarde);
+                //geri.sort(palyginti_pavarde);
+                //std::sort(blogi.begin(), blogi.end(), palyginti_pavarde);
+                //std::sort(geri.begin(), geri.end(), palyginti_pavarde);
+
             }
             else if (pasirinkimas == "G") {
-                blogi.sort(palyginti_galutinis);
-                geri.sort(palyginti_galutinis);
+                //blogi.sort(palyginti_galutinis);
+                grupe.sort(palyginti_galutinis);
+                //geri.sort(palyginti_galutinis);
+                //std::sort(blogi.begin(), blogi.end(), palyginti_galutinis);
+                //std::sort(geri.begin(), geri.end(), palyginti_galutinis);
             }
 
+           
             cout << "Duomenu rusiavimas: " << t.elapsed() << endl;
 
             t.reset();
-            rasymas_i_faila(geri, "GeraiBesimokantys.txt");
+            rasymas_i_faila(grupe, "GeraiBesimokantys.txt");
+            //rasymas_i_faila(geri, "GeraiBesimokantys.txt");
             rasymas_i_faila(blogi, "BlogaiBesimokantys.txt");
 
             cout << "Failu isvedimas: " << t.elapsed() << endl << endl;
