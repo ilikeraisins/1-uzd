@@ -49,7 +49,7 @@ int main() {
 
             //2 strategija
 
-            //list<studentas> blogi;
+            /*list<studentas> blogi;
             vector<studentas> blogi;
 
             //grupe.sort(palyginti_galutinis);
@@ -62,8 +62,16 @@ int main() {
                     k++;
                 }
             }
-            grupe.resize(grupe.size() - k);
-            
+            grupe.resize(grupe.size() - k);*/
+
+            //3 strategija
+
+            int dydis = grupe.size();
+            vector<studentas> blogi(dydis);
+            copy_if(grupe.begin(), grupe.end(), blogi.begin(), [](studentas x) {return x.galutinis < 5.0; });
+            grupe.erase(std::remove_if(grupe.begin(),grupe.end(), [](studentas x) {return x.galutinis < 5.0; }), grupe.end());
+            blogi.resize(dydis-grupe.size());
+
             if (pasirinkimas == "V") {
                 //blogi.sort(palyginti_vardas);
                 //grupe.sort(palyginti_vardas);
@@ -86,7 +94,7 @@ int main() {
                 //grupe.sort(palyginti_galutinis);
                 //geri.sort(palyginti_galutinis);
                 std::sort(blogi.begin(), blogi.end(), palyginti_galutinis);
-                //std::sort(grupe.begin(), grupe.end(), palyginti_galutinis);
+                std::sort(grupe.begin(), grupe.end(), palyginti_galutinis);
                 //std::sort(geri.begin(), geri.end(), palyginti_galutinis);
             }
 
