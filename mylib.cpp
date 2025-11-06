@@ -158,19 +158,3 @@ bool palyginti_pavarde(studentas a, studentas b) {
 bool palyginti_galutinis(studentas a, studentas b) {
     return a.galutinis > b.galutinis;
 }
-
-
-class timer {
-    using hrClock = std::chrono::high_resolution_clock;
-    using durationDouble = std::chrono::duration<double>;
-private:
-    std::chrono::time_point<hrClock> start;
-public:
-    timer() : start{ hrClock::now() } {}
-    void reset() {
-        start = hrClock::now();
-    }
-    double elapsed() const {
-        return durationDouble( hrClock::now() - start).count();
-    }
-};

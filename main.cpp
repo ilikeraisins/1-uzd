@@ -163,10 +163,10 @@ int main() {
         }
     }
     else {
-        generuoti_failus(1000, 5, "C:\\Users\\Monika\\source\\repos\\main\\main\\1000studentai.txt");
-        generuoti_failus(10000, 5, "C:\\Users\\Monika\\source\\repos\\main\\main\\10000studentai.txt");
-        generuoti_failus(100000, 5, "C:\\Users\\Monika\\source\\repos\\main\\main\\100000studentai.txt");
-        generuoti_failus(1000000, 5, "C:\\Users\\Monika\\source\\repos\\main\\main\\1000000studentai.txt");
-        generuoti_failus(10000000, 5, "C:\\Users\\Monika\\source\\repos\\main\\main\\10000000studentai.txt");
+        generuoti_failus(1000, 5, "C1000studentai.txt");
+        generuoti_failus(10000, 5, "10000studentai.txt");
+        generuoti_failus(100000, 5, "100000studentai.txt");
+        generuoti_failus(1000000, 5, "1000000studentai.txt");
+        generuoti_failus(10000000, 5, "10000000studentai.txt");
     }
 }

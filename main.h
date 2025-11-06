@@ -47,4 +47,17 @@ bool palyginti_galutinis(studentas, studentas);
 std::stringstream failo_skaitimas(string);
 studentas studentas_uzpildimas(string);
 
-class timer;
+class timer {
+    using hrClock = std::chrono::high_resolution_clock;
+    using durationDouble = std::chrono::duration<double>;
+private:
+    std::chrono::time_point<hrClock> start;
+public:
+    timer() : start{ hrClock::now() } {}
+    void reset() {
+        start = hrClock::now();
+    }
+    double elapsed() const {
+        return durationDouble(hrClock::now() - start).count();
+    }
+};
