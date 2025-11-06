@@ -1,16 +1,15 @@
 #include "main.h"
 
-double mediana(/*vector<int>*/ list<int> x) {
-    /*
-    sort(x.begin(), x.end());
+double mediana(vector<int> x /*list<int> x*/) {
+    std::sort(x.begin(), x.end());
 
     size_t n = x.size();
     if (n % 2 == 0) {
         return (double)(x[(n - 1) / 2] + x[n / 2]) / 2.0;
     }
     return (double)x[n / 2];
-    */
-
+    
+    /*
     x.sort();
     size_t n = x.size();
     int med = 0;
@@ -33,9 +32,10 @@ double mediana(/*vector<int>*/ list<int> x) {
         }
         return (double)med;
     }
+    */
 }
 
-double vidurkis(/*vector<int>*/ list<int> x) {
+double vidurkis(vector<int> x /*list<int> x*/) {
     int suma = 0;
     for (int sk : x) {
         suma = suma + sk;
@@ -73,7 +73,7 @@ std::stringstream failo_skaitimas(string failo_vardas) {
     return buffer;
 }
 
-void rasymas_i_faila(/*vector<int>*/ list<studentas> x, string failo_vardas) {
+void rasymas_i_faila(vector<studentas>x /*list<studentas> x*/, string failo_vardas) {
     string visas;
     string galut_v;
     string galut_m;
@@ -87,8 +87,9 @@ void rasymas_i_faila(/*vector<int>*/ list<studentas> x, string failo_vardas) {
     out_f.close();
 }
 
-void lentele(/*vector<int>*/ list<studentas> x, string y) {
-    x.sort(palyginti);
+void lentele(vector<studentas> x /*list<studentas> x*/, string y) {
+    //x.sort(palyginti);
+    std:sort(x.begin(), x.end(), palyginti);
     cout << setw(15) << left << "Vardas" << setw(15) << left << "Pavarde" << setw(15) << right;
     if (y == "V") {
         cout << "Galutinis pazymis(Vid.)" << setw(40) << right << "Objekto saugojimo atmintyje adresas" << endl;
