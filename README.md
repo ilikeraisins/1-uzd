@@ -36,7 +36,8 @@ Testavimas:
 
 Pazydžiai:
     1. 1000
-    ![](ekrano_kopijos/vector 1000.png)
+    <img width="1547" height="792" alt="vector 1000" src="https://github.com/user-attachments/assets/67bd7bcb-2ece-4831-87b2-998d887c6747" />
+
 
 
 
