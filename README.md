@@ -12,9 +12,9 @@ Sistemos parametrai:
 
 Testavimas:
 
+1 strategija: Bendro konteinerio skaidymas į du to paties tipo konteinerius:
 
-
-1. Naudojant std::vector konteinerį trukmės vidurkiai:
+1) Naudojant std::vector konteinerį trukmės vidurkiai:
 
 
 
@@ -48,7 +48,7 @@ Pazydžiai:
 
 
 
-2.Naudojant std::list konteinerį trukmės vidurkiai:
+2)Naudojant std::list konteinerį trukmės vidurkiai:
 
 
 
@@ -78,5 +78,51 @@ Pavyzdžiai:
 10000000 irašų:
 
 <img width="1182" height="478" alt="list 10000000" src="https://github.com/user-attachments/assets/d0a59e69-aae6-4dba-ac6b-3b78b3cf9517" />
+
+
+
+
+2 strategija:
+
+1) Naudojant std::vector konteinerį trukmės vidurkiai:
+
+
+|Įrašų skaičius | Failo nuskaitymo trukmė | Duomenų surūšiavimo į dvi grupes trukmė | Duomenų įrašymo į failus trukmė | Viso          |
+
+|---------------|-------------------------|-----------------------------------------|---------------------------------|---------------|
+
+|1000           | 0.0046651               | 0.0061392                               | 0.0036483                       | 0.0178417     |
+
+|10000          | 0.003715                | 0.043608                                | 0.0163485                       | 0.0661079     |
+
+|100000         | 0.0342964               | 0.4261878                               | 0.1408882                       | 0.603858      |
+
+|1000000        | 0.2983952               | 4.44801                                 | 1.489304                        | 6.238178      |
+
+|10000000       | 3.10823                 | 48.75358                                | 15.88736                        | 67.75258      |
+
+|---------------|-------------------------|-----------------------------------------|---------------------------------|---------------|
+
+
+
+2) 2)Naudojant std::list konteinerį trukmės vidurkiai:
+
+
+
+|Įrašų skaičius | Failo nuskaitymo trukmė | Duomenų surūšiavimo į dvi grupes trukmė | Duomenų įrašymo į failus trukmė | Viso          |
+
+|---------------|-------------------------|-----------------------------------------|---------------------------------|---------------|
+
+|1000           | 0.0007948               | 0.0143083                               | 0.0047713                       | 0.0221834     |
+
+|10000          | 0.0039097               | 0.132647                                | 0.0243090                       | 0.1628828     |
+
+|100000         | 0.0331337               | 1.676214                                | 0.238072                        | 1.949878      |
+
+|1000000        | 0.298025                | 21.57356                                | 2.515094                        | 24,3888       |
+
+|10000000       | 
+
+|---------------|-------------------------|-----------------------------------------|---------------------------------|---------------|
 
 
