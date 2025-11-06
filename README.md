@@ -14,7 +14,7 @@ Testavimas:
 
 
 
-1. Naudojant std::vector konteinerį:
+1. Naudojant std::vector konteinerį trukmės vidurkiai:
 
 
 
@@ -34,11 +34,13 @@ Testavimas:
 
 |---------------|-------------------------|-----------------------------------------|---------------------------------|---------------|
 
+Pazydžiai:
+    1. 1000
+    ![](ekrano_kopijos/vector 1000.png)
 
 
 
-
-2.Naudojant std::list konteinerį:
+2.Naudojant std::list konteinerį trukmės vidurkiai:
 
 
 
