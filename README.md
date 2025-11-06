@@ -96,11 +96,13 @@ Pazydžiai:
 
 1000 irašų:
 
-<img width="1178" height="447" alt="vector 1000-1" src="https://github.com/user-attachments/assets/ea386d32-21cf-4fe3-81b0-642aa1384ec1" />
+<img width="1178" height="447" alt="1 vector 1000" src="https://github.com/user-attachments/assets/8d2a5774-b6db-4c7f-8eb5-db872889018c" />
+
 
 10000000 irašų:
 
-<img width="1175" height="474" alt="vecctor 10000000" src="https://github.com/user-attachments/assets/b6163ef0-777e-49f4-b211-c2f98698793e" />
+<img width="1175" height="474" alt="1 vector 10000000" src="https://github.com/user-attachments/assets/8da85035-6654-404b-b21a-327851821637" />
+
 
 
 
@@ -131,12 +133,13 @@ Pavyzdžiai:
 
 1000 irašų:
 
-<img width="1165" height="474" alt="list 1000" src="https://github.com/user-attachments/assets/167ed565-c5b3-4909-b242-9b1e8aced9b9" />
+<img width="1165" height="474" alt="1 list 1000" src="https://github.com/user-attachments/assets/cf9d4922-8c6e-4cfd-bda3-4dfb05100e1d" />
+
 
 10000000 irašų:
 
-<img width="1182" height="478" alt="list 10000000" src="https://github.com/user-attachments/assets/d0a59e69-aae6-4dba-ac6b-3b78b3cf9517" />
 
+<img width="1182" height="478" alt="1 list 10000000" src="https://github.com/user-attachments/assets/3921f24c-0858-421d-941b-77289d408177" />
 
 
 
@@ -161,6 +164,16 @@ Pavyzdžiai:
 
 |---------------|-------------------------|-----------------------------------------|---------------------------------|---------------|
 
+Pavyzdžiai:
+
+1000 irašų:
+
+<img width="1165" height="460" alt="2 vector 1000" src="https://github.com/user-attachments/assets/dae8ddc2-9163-4f0e-8171-b060803efae6" />
+
+10000000 įrašų:
+
+
+<img width="1171" height="472" alt="2 vector 10000000" src="https://github.com/user-attachments/assets/1c186eaf-216e-4d7f-ae7a-13bd2281488e" />
 
 
  2)Naudojant std::list konteinerį trukmės vidurkiai:
@@ -183,6 +196,22 @@ Pavyzdžiai:
 
 |---------------|-------------------------|-----------------------------------------|---------------------------------|---------------|
 
+Pavyzdžiai:
+
+1000 irašų:
+
+
+<img width="1178" height="452" alt="2 list 1000" src="https://github.com/user-attachments/assets/3397673b-4137-4ac5-9f26-a94c8aedabf0" />
+
+
+
+10000000 įrašų:
+
+
+<img width="1176" height="452" alt="2 list 10000000" src="https://github.com/user-attachments/assets/1ff73d0d-5083-4640-9da7-6900372a45d1" />
+
+
+
 
 
 3 strategija naudojant tik std::vector konteinerį:
@@ -203,6 +232,21 @@ Pavyzdžiai:
 |10000000       | 3.247136                | 42.29478                                | 15.86184                        | 61.40678      |
 
 |---------------|-------------------------|-----------------------------------------|---------------------------------|---------------|
+
+
+Pavyzdžiai:
+
+1000 įrašų:
+
+
+<img width="1167" height="462" alt="3 vector 1000" src="https://github.com/user-attachments/assets/940b89d7-6d6d-459d-b0a6-024188120385" />
+
+
+10000000 įrašų:
+
+
+<img width="1197" height="466" alt="3 vector 10000000" src="https://github.com/user-attachments/assets/944cdeff-4132-46ba-98f1-76addf1e689b" />
+
 
 
 Testavimo išvados:
