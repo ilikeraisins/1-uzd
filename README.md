@@ -9,6 +9,24 @@ Releasai:
 5. v0.3 - testuotas ir README.md faile aprašytas programos veikimas naudojant std::vector ir std::list konteinerius;
 6. v1.0 - testuotas ir README.md faile aprašytas programos veikimas pagal 3 studentų suskirstymo į dvi grupes strategijas.
 
+
+Diegimo ir paleidimo instrukcija:
+
+1. Būtinos sąlygos:
+	1) turėti c++ kompiliatorių ir cmake programą (versija nemažesnė nei 3.20) įdiegta;
+	2) aplanke ,,1-uzd" turėtų būti aplankai ,,src", ,,Include" ir tekstinis failas ,,CMakeLists.txt";
+2. Diegimo žingniai:
+	1) aplanką 1-uzd atidaryti terminale;
+	2) paleisti komandą ,,cmake .\CMakeLists.txt";
+	3) paleisti komandą ,,cmake --install .";
+	4) paleisti komandą ,,cmake --build .";
+3. Paleidimas pirmas variantas:
+	1) per terminala atidaryti ,,1-uzd" aplanke atsiradusi aplanką ,,Debug" paleidžiant komandą ,,cd .\Debug\";
+	2) paleisti komandą ,,.\1-uzd.exe";
+4. Paleidimas antras variantas:
+	1) atidaryti ,,1-uzd" aplanke atsiradusi aplanką ,,Debug" naudojant failų naršyklę;
+	2) paleisti programą "1-uzd";	
+
 Naudojimo instrukcija:
 
 1. Paleisti programa;
@@ -39,6 +57,8 @@ Naudojimo instrukcija:
 				12. Išvedama studentų suvestinė su studentų vardais, pavardėmis ir pasirinktų galutiniu pažymiu; 
 	2) įvedus G pasirenkama generuoti failus su duomenimis;
 		3. Sugeneruojami failai su 1000, 10000, 100000, 1000000 ir 10000000 studentų duomenimis.
+
+Perspėjimas: prieš skaitant duomenys iš failo, juos reikia sugeneruoti;
 
 
 Testavimo sistemos parametrai:
